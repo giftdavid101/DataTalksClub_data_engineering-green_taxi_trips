@@ -1,0 +1,15 @@
+docker run ubuntu -to start docker
+docker run -it ubuntu- to start interactive terminal
+check if you have python in docker it environment by doing python3 else update with (apt update)
+install python3 with apt install python3
+ -verify python3 installation python3 -V
+
+docker run -it python:3.13.11
+docker run -it --entrypoint=bash python:3.13.11
+docker ps -a
+docker ps -aq
+
+docker rm `docker ps -aq`
+docker ps -a
+
+uv init --python 3.13 - created thr pyproject.toml, main.py and python version
