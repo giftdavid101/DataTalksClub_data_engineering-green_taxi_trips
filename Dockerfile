@@ -6,6 +6,8 @@ RUN pip install pandas pyarrow
 
 WORKDIR /code
 ENV PATH = "/code/.venv/bin:$PATH"
-COPY pipeline.py
+COPY pipeline.py .
 
 ENTRYPOINT ['python', 'pipeline.py']
+
+

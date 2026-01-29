@@ -12,4 +12,61 @@ docker ps -aq
 docker rm `docker ps -aq`
 docker ps -a
 
+#run docker container
+docker compose up -d
+
+
 uv init --python 3.13 - created thr pyproject.toml, main.py and python version
+uv add --dev pgcli
+uv run pgcli
+uv run pgcli -h localhost -p 5432 -u root -d ny_taxi
+uv run pgcli -h localhost -p 5433 -u postgres -d ny_taxi
+
+find /workspaces -name "docker-compose.yml" -o -name "docker-compose.yaml"
+
+services:
+  db:
+    container_name: postgres
+    image: postgres:17-alpine
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: ny_taxi
+    ports:
+      - "5433:5432"
+    volumes:
+      - vol-pgdata:/var/lib/postgresql/data
+
+  pgadmin:
+    container_name: pgadmin
+    image: dpage/pgadmin4:latest
+    environment:
+      PGADMIN_DEFAULT_EMAIL: pgadmin@pgadmin.com
+      PGADMIN_DEFAULT_PASSWORD: pgadmin
+    ports:
+      - "8080:80"
+    volumes:
+      - vol-pgadmin_data:/var/lib/pgadmin
+
+volumes:
+  vol-pgdata:
+  vol-pgadmin_data:
+
+nano docker-compose.yaml
+
+
+ ls
+Dockerfile  README.md  commands.txt  data  docker-compose.yaml  homework-solutions.txt  main.py  pipeline  pyproject.toml  uv.lock
+
+uv pip install pgcli
+uv add --dev jupyter
+ uv run jupyter notebook
+
+
+ docker run -it --rm \
+-e POSTGRES_USER="root" \
+-e POSTGRES_PASSWORD="postgres" \
+-e POSTGRES_DB="ny_taxi" \
+-v ny_taxi_postgres_data:/var/lib/postgresql \
+-p 5432: 5432 \
+postgres:18
